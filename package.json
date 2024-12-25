@@ -1,0 +1,30 @@
+{
+  "name": "server-habit",
+  "version": "1.0.0",
+  "main": "index.js",
+  "engines": {
+    "node": "22.12"
+  },
+  "scripts": {
+    "dev" : "tsx src/server.ts",
+    "build" : "tsup src",
+    "start": "node dist/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "prisma": "^6.1.0",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.1.0",
+    "fastify": "^5.2.0",
+    "zod": "^3.24.1"
+  }
+}
