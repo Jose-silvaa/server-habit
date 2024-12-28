@@ -10,8 +10,8 @@ export const getUserByIdController = async (req:any, res:any) => {
       } else {
         res.code(404).send({ message: 'User not found' });
       }
-    } catch (error) {
-      res.code(500).send({ message: 'Internal Server Error' });
+    } catch (error: any) {
+      res.code(500).send({ message: 'Internal Server Error', error : error.message});
     }
   };
   
