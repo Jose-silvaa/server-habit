@@ -1,41 +1,21 @@
-import { PrismaClient } from '@prisma/client'
-import { number, z } from 'zod'
 import fastify from 'fastify'
+import { userRoutes } from './routes/userRoutes';
 
-const app = fastify();
+const server = fastify();
 
-const prisma = new PrismaClient()
+server.register(userRoutes)
 
-app.get('/users' , async() =>{
-
-    const users = await prisma.user.findMany();
-
-    return { users }
-})
-
-app.post('/users', async (request, reply)=>{
-
-    const createUserSchema = z.object({
-        name : z.string(),
-        email : z.string().email(),
-
-    })
-
-    const {name, email} = createUserSchema.parse(request.body)
-
-    await prisma.user.create({
-        data : {
-            name,
-            email
-        }
-    })
-
-    return reply.status(201).send()
-})
-
-app.listen({
-    host : '0.0.0.0',
-    port : process.env.PORT ? Number(process.env.PORT) : 3333,
-}).then(()=>{
-    console.log('HTTP SERVER RUNNING')
-})
+const start = async () => {
+    try {
+      await server.listen({
+        host: '0.0.0.0',
+        port: process.env.PORT ? Number(process.env.PORT) : 3333,
+      });
+      console.log('Serve Roda');
+    } catch (err) {
+      console.error('Error starting the server:', err);
+      process.exit(1);
+    }
+  };
+  
+  start();
