@@ -4,7 +4,7 @@ export const getUserByIdController = async (req:any, res:any) => {
     const { id } = req.params;
 
     try {
-      const user = await userService.getUserByIdService(Number(id));
+      const user = await userService.getUserByIdService(id);
       if (user) {
         res.send(user);
       } else {
