@@ -1,4 +1,4 @@
-import * as userService from '../services/userService'
+import * as userService from '../../services/userService'
 
 export const getUserByIdController = async (req:any, res:any) => {
     const { id } = req.params;

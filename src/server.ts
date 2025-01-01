@@ -1,9 +1,13 @@
 import fastify from 'fastify'
-import { userRoutes } from './routes/userRoutes';
+import { userRoutes } from './routes/users/userRoutes';
+import { cueRoutes } from './routes/cue/cueRoutes';
+import { cravingRoutes } from './routes/craving/cravingRoutes';
 
 const server = fastify();
 
-server.register(userRoutes)
+server.register(userRoutes);
+server.register(cueRoutes);
+server.register(cravingRoutes)
 
 const start = async () => {
     try {

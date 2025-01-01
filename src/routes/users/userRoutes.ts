@@ -1,4 +1,4 @@
-import { getUserByIdController, createUserController } from "../controllers/userController";
+import { getUserByIdController, createUserController } from "../../controllers/user/userController";
 
 export const userRoutes = (fastify: any)=>{
     
