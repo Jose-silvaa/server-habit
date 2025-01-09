@@ -7,3 +7,7 @@ export const getUserByIdService = async (id:any) =>{
 export const createUserService = async (userData:any) => {
     return await userModel.createUser(userData);
 }
+
+export const verifyEmailUserService = async(email: string) =>{
+    return await userModel.verifyEmailUsers(email);   
+}

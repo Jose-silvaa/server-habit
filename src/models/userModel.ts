@@ -12,3 +12,9 @@ export const createUser = async (data: any) => {
         data,
     })
 }
+
+export const verifyEmailUsers = async(email : string) =>{
+    return await prisma.user.findUnique({
+        where : {email}
+    })
+}

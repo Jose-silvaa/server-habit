@@ -25,8 +25,7 @@
   "dependencies": {
     "@prisma/client": "^6.1.0",
     "fastify": "^5.2.0",
-    "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7",
+    "fastify-bcrypt": "^1.0.1",
     "zod": "^3.24.1"
   }
 }
