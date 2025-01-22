@@ -1,7 +1,7 @@
 node_modules
 # Keep environment variables out of version control
 .env
-.crt
-.csr
-.key
+server.crt
+server.csr
+server.key
 dist
