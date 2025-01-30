@@ -41,3 +41,43 @@ export const createUserController = async (req: FastifyRequest, res: FastifyRepl
       res.code(500).send({ message: 'An error occurred while creating the user' , error : error.message});
     }
 };
+
+export const loginUserController = async(req : FastifyRequest, res: FastifyReply) =>{
+
+  const { email, password } = req.body as { email: string; password: string };
+
+    
+  if (!email || !password ) {
+    return res.code(400).send({ message: 'All fields are required: email, password' });
+  }
+
+  try {
+    
+    const validateUser = await userService.verifyEmailUserService(email);
+
+    if (!validateUser) {
+      return res.status(404).send({ message: 'User not found' });
+    }
+
+    if (!validateUser.password) {
+      return res.status(400).send({ message: 'Password not set for user' });
+    }
+
+    const isPasswordValid = await req.server.bcrypt.compare(password, validateUser.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).send({ message: 'Password is incorrect' });
+    }
+    
+    return res.code(200).send({ message : 'Login successful'})
+
+  } catch (error: any) {
+    
+    return res.status(500).send({
+      message: 'Internal Server Error',  
+      error: error.message || 'An unexpected error occurred',  
+    });
+  }
+
+
+}
