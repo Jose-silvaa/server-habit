@@ -3,7 +3,8 @@ import prisma from "../db/client";
 
 export const getUserById = async(id: any) =>{
     return await prisma.user.findUnique({
-        where : {id}
+        where : {id},
+        select : { email : true, createdAt : true}
     })
 }
 
@@ -15,6 +16,7 @@ export const createUser = async (data: any) => {
 
 export const verifyEmailUsers = async(email : string) =>{
     return await prisma.user.findUnique({
-        where : {email}
+        where : {email},
+        select : {email : true, password : true}
     })
 }
