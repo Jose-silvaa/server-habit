@@ -56,24 +56,24 @@ export const loginUserController = async(req : FastifyRequest, res: FastifyReply
     const validateUser = await userService.verifyEmailUserService(email);
 
     if (!validateUser) {
-      return res.status(404).send({ message: 'User not found' });
+      return res.code(404).send({ message: 'User not found' });
     }
 
     if (!validateUser.password) {
-      return res.status(400).send({ message: 'Password not set for user' });
+      return res.code(400).send({ message: 'Password not set for user' });
     }
 
     const isPasswordValid = await req.server.bcrypt.compare(password, validateUser.password);
 
     if (!isPasswordValid) {
-      return res.status(401).send({ message: 'Password is incorrect' });
+      return res.code(401).send({ message: 'Password is incorrect' });
     }
-    
-    return res.code(200).send({ message : 'Login successful'})
+
+    return res.code(200).send(validateUser)
 
   } catch (error: any) {
     
-    return res.status(500).send({
+    return res.code(500).send({
       message: 'Internal Server Error',  
       error: error.message || 'An unexpected error occurred',  
     });
