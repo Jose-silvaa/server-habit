@@ -1,4 +1,4 @@
-import * as userModel from '../models/userModel';
+import * as userModel from '../models/user/userModel';
 
 export const getUserByIdService = async (id:any) =>{
     return await userModel.getUserById(id)

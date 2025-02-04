@@ -21,6 +21,8 @@ model User {
   password String
   createdAt DateTime @default(now())
   habits Habit[]
+  feedbacks Feedback[]
+
 }
 
 
@@ -67,3 +69,11 @@ model Craving {
   habits      Habit[]  // Relacionamento inverso com hábitos
 }
 
+model Feedback{
+  id String @id @default(cuid())
+  userId String   // Referência ao usuário que deu o feedback
+  user User   @relation(fields: [userId], references: [id]) // Relacionamento com o User
+  feedback String
+  createdAt DateTime @default(now())
+
+}

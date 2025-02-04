@@ -2,8 +2,10 @@ import fastify from 'fastify'
 import { userRoutes } from './routes/users/userRoutes';
 import { cueRoutes } from './routes/cue/cueRoutes';
 import { cravingRoutes } from './routes/craving/cravingRoutes';
+import { feedbackRoutes } from './routes/feedback/feedbackRoute';
 import fastifyBcrypt from 'fastify-bcrypt';
 import fastifyCors from '@fastify/cors';
+
 
 
 const server = fastify();
@@ -13,6 +15,7 @@ server.register(fastifyBcrypt, {
 })
 server.register(userRoutes);
 server.register(cueRoutes);
+server.register(feedbackRoutes)
 server.register(cravingRoutes)
 server.register(fastifyCors, {
   origin : true
