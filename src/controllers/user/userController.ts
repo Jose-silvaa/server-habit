@@ -79,5 +79,4 @@ export const loginUserController = async(req : FastifyRequest, res: FastifyReply
     });
   }
 
-
 }
