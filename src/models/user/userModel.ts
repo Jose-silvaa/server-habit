@@ -1,10 +1,10 @@
-import prisma from "../db/client";
+import prisma from "../../db/client";
 
 
 export const getUserById = async(id: any) =>{
     return await prisma.user.findUnique({
         where : {id},
-        select : { email : true, createdAt : true}
+        select : { id: true, name : true, email : true, createdAt : true}
     })
 }
 
