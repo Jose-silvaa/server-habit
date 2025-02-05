@@ -55,8 +55,8 @@ export const loginUserController = async(req : FastifyRequest, res: FastifyReply
     
     const validateUser = await userService.verifyEmailUserService(email);
 
-    if (!validateUser) {
-      return res.code(404).send({ message: 'User not found' });
+    if (!validateUser?.email) {
+      return res.code(404).send({ message: 'Incorrect email' });
     }
 
     if (!validateUser.password) {
@@ -66,7 +66,7 @@ export const loginUserController = async(req : FastifyRequest, res: FastifyReply
     const isPasswordValid = await req.server.bcrypt.compare(password, validateUser.password);
 
     if (!isPasswordValid) {
-      return res.code(401).send({ message: 'Password is incorrect' });
+      return res.code(401).send({ message: 'Incorrect password' });
     }
 
     return res.code(200).send(validateUser)
