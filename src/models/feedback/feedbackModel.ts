@@ -8,3 +8,8 @@ export const createFeedBack = async (user_id: string, feedback : string) => {
         }
     })
 }
+
+
+export const getAllFeedbacks = async() =>{ 
+    return await prisma.feedback.findMany();
+}
