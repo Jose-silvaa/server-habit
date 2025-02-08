@@ -11,3 +11,7 @@ export const createUserService = async (userData:any) => {
 export const verifyEmailUserService = async(email: string) =>{
     return await userModel.verifyEmailUsers(email);   
 }
+
+export const getAllUsersService = async()=>{
+    return await userModel.getAllUsers();
+}

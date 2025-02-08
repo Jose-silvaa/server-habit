@@ -38,3 +38,20 @@ export const createFeedBackController = async(req: FastifyRequest, res : Fastify
         }
 
 }
+
+
+export const getAllFeedbacksController = async(req : FastifyRequest, res : FastifyReply) =>{
+
+    try {
+        const feedbackExists = await feedBackService.getAllFeedbacksService();
+
+        if(feedbackExists.length == 0){
+            res.code(404).send({message : "There's no feedbacks"})
+        }
+
+        res.code(200).send(feedbackExists)
+        
+    } catch (error : any) {
+        return res.code(500).send({ message: 'Internal Server Error', error: error.message || 'Unknown error occurred'});
+    }
+}

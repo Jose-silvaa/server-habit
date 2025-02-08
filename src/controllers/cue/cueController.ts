@@ -22,10 +22,10 @@ export const getAllCuesController = async(req : any, res: any) =>{
     try {
         const allCues = await cueService.getAllCuesService();
 
-        if(allCues){
-            res.send(allCues);
-        }else{
+        if(allCues.length == 0){
             res.code(404).send({message : 'There are no cues registered.'})
+        }else{
+            res.code(200).send(allCues)
         }
     } catch (error: any) {
         res.code(500).send({message : 'Internal Server Error', error : error.message})

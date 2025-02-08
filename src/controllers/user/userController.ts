@@ -80,3 +80,22 @@ export const loginUserController = async(req : FastifyRequest, res: FastifyReply
   }
 
 }
+
+export const getAllUsersController = async(req : FastifyRequest, res : FastifyReply) =>{
+  
+  try {
+    
+    const getUsers = await userService.getAllUsersService();
+
+    if(getUsers.length == 0){
+      res.code(404).send({message : "There's no user registred"})
+    }
+
+    res.code(200).send(getUsers);
+
+  } catch (error: any) {
+    return res.code(500).send({ message: 'Internal Server Error',  error: error.message || 'An unexpected error occurred'});
+  }
+}
+
+

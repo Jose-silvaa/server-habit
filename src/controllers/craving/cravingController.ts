@@ -24,10 +24,10 @@ export const getAllCravingController = async (req : any, res : any) =>{
         
         const allCraving = await cravingService.getAllCravingService();
 
-        if(allCraving){
-            res.send(allCraving);
-        }else{
+        if(allCraving.length == 0){
             res.code(404).send({message : 'There are no cravings registered'})
+        }else{
+            res.code(200).send(allCraving);
         }
     } catch (error : any) {
         res.code(500).send({message : 'Internal Server Error', error : error.message})
