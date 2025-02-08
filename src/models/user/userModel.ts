@@ -20,3 +20,7 @@ export const verifyEmailUsers = async(email : string) =>{
         select : {email : true, password : true, id : true}
     })
 }
+
+export const getAllUsers = async() =>{
+    return await prisma.user.findMany();
+}

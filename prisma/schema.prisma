@@ -29,7 +29,7 @@ model User {
 model Habit{
 
   id        String    @id @default(cuid())
-  name      String    // Nome do hábito
+  name      String    @unique// Nome do hábito
   user      User      @relation(fields: [userId], references: [id])
   userId    String    // Chave estrangeira para o modelo User
   createdAt DateTime  @default(now()) // Data de criação do hábito

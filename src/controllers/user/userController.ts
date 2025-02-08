@@ -55,8 +55,8 @@ export const loginUserController = async(req : FastifyRequest, res: FastifyReply
     
     const validateUser = await userService.verifyEmailUserService(email);
 
-    if (!validateUser) {
-      return res.code(404).send({ message: 'User not found' });
+    if (!validateUser?.email) {
+      return res.code(404).send({ message: 'Incorrect email' });
     }
 
     if (!validateUser.password) {
@@ -66,7 +66,7 @@ export const loginUserController = async(req : FastifyRequest, res: FastifyReply
     const isPasswordValid = await req.server.bcrypt.compare(password, validateUser.password);
 
     if (!isPasswordValid) {
-      return res.code(401).send({ message: 'Password is incorrect' });
+      return res.code(401).send({ message: 'Incorrect password' });
     }
 
     return res.code(200).send(validateUser)
@@ -80,3 +80,22 @@ export const loginUserController = async(req : FastifyRequest, res: FastifyReply
   }
 
 }
+
+export const getAllUsersController = async(req : FastifyRequest, res : FastifyReply) =>{
+  
+  try {
+    
+    const getUsers = await userService.getAllUsersService();
+
+    if(getUsers.length == 0){
+      res.code(404).send({message : "There's no user registred"})
+    }
+
+    res.code(200).send(getUsers);
+
+  } catch (error: any) {
+    return res.code(500).send({ message: 'Internal Server Error',  error: error.message || 'An unexpected error occurred'});
+  }
+}
+
+
