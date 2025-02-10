@@ -2,13 +2,17 @@ import { FastifyRequest } from 'fastify/types/request';
 import * as userService from '../../services/userService'
 import { FastifyReply } from 'fastify';
 
+interface Params {
+  id : string
+}
+
 export const getUserByIdController = async (req:any, res:any) => {
     const { id } = req.params;
 
     try {
       const user = await userService.getUserByIdService(id);
       if (user) {
-        res.send(user);
+        res.code(200).send(user);
       } else {
         res.code(404).send({ message: 'User not found' });
       }
@@ -97,5 +101,26 @@ export const getAllUsersController = async(req : FastifyRequest, res : FastifyRe
     return res.code(500).send({ message: 'Internal Server Error',  error: error.message || 'An unexpected error occurred'});
   }
 }
+
+export const bookedLastActivityController = async (req : FastifyRequest<{Params : Params}> , res : FastifyReply) =>{
+
+  const { id } = req.params;
+
+  try {
+    const userExist = await userService.getUserByIdService(id);
+
+    if(!userExist){
+      res.code(404).send({message : "User not found"})
+    }
+
+    await userService.bookedLastActivityService(id);
+
+    res.code(200).send({message : "See you soon"})
+
+  } catch (error : any) {
+    return res.code(500).send({ message: 'Internal Server Error',  error: error.message || 'An unexpected error occurred'});
+  }
+  
+} 
 
 

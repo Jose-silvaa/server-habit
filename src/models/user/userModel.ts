@@ -1,6 +1,14 @@
 import prisma from "../../db/client";
 
 
+export const bookedLastActivity = async(userId : any) =>{
+
+    return await prisma.user.update({
+        where :  {id : userId},
+        data : { lastActivity : new Date()}
+    })
+}
+
 export const getUserById = async(id: any) =>{
     return await prisma.user.findUnique({
         where : {id},

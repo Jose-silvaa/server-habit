@@ -15,3 +15,7 @@ export const verifyEmailUserService = async(email: string) =>{
 export const getAllUsersService = async()=>{
     return await userModel.getAllUsers();
 }
+
+export const bookedLastActivityService = async(userId : any) =>{
+    return await userModel.bookedLastActivity(userId);
+}
