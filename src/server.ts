@@ -7,6 +7,8 @@ import { routineRoutes } from './routes/routine/routineRoutes';
 import fastifyBcrypt from 'fastify-bcrypt';
 import fastifyCors from '@fastify/cors';
 import { rewardRoutes } from './routes/reward/rewardRoutes';
+import { habitRoutes } from './routes/habit/habitRoutes';
+import { scheduleDaysRoutes } from './routes/scheduleDays/scheduleDaysRoutes';
 
 
 
@@ -21,6 +23,8 @@ server.register(cueRoutes);
 server.register(feedbackRoutes)
 server.register(cravingRoutes)
 server.register(routineRoutes)
+server.register(scheduleDaysRoutes)
+server.register(habitRoutes)
 server.register(rewardRoutes)
 server.register(fastifyCors, {
   origin : true

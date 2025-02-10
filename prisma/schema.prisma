@@ -19,10 +19,10 @@ model User {
   name String 
   email String @unique
   password String
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now())  
+  lastActivity DateTime @default(now())
   habits Habit[]
   feedbacks Feedback[]
-
 }
 
 
@@ -38,12 +38,29 @@ model Habit{
   routine   Routine   @relation(fields: [routineId], references: [id])
   reward    Reward    @relation(fields: [rewardId], references: [id])
   craving   Craving   @relation(fields: [cravingId], references: [id])
-
+  
   cueId String
   routineId String
   rewardId String
   cravingId String
+
+  selectedDays Int[]
+  scheduledDays ScheduledDay[]
+  streak     Int       @default(0) // Contagem da streak
+
 }
+
+model ScheduledDay {
+  id        String   @id @default(cuid())
+  habit     Habit    @relation(fields: [habitId], references: [id])
+  habitId   String  
+  weekday   Int      
+  completed Boolean  
+  createdAt DateTime @default(now()) 
+
+  @@unique([habitId, weekday])
+}
+
 
 model Cue {
   id          String   @id @default(cuid())
