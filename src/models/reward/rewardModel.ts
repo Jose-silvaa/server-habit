@@ -6,6 +6,12 @@ export const createReward = async(data : any) =>{
     })
 }
 
+export const getRewardByIdService = async (id : any)=>{
+    return await prisma.reward.findUnique({
+        where : {id}
+    })
+}
+
 export const readAllReward = async () =>{
     return await prisma.reward.findMany();
 }

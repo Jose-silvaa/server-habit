@@ -123,4 +123,27 @@ export const bookedLastActivityController = async (req : FastifyRequest<{Params 
   
 } 
 
+export const getAllInformationRequiredController = async (req : FastifyRequest, res : FastifyReply) =>{
+
+  const { cueId, routineId, rewardId, cravingId } = req.body as { cueId: string; routineId: string; rewardId: string; cravingId : string};
+
+  if (!cueId || !routineId || !rewardId || !cravingId) {
+    res.code(400).send({ message: 'All fields are required: cueId, routineId, rewardId, cravingId' });
+  }
+
+  try {
+    const data = await userService.getAllInformationRequiredService(cueId, routineId, rewardId, cravingId);
+
+    if(!data){
+      res.code(404).send({message : "Invalid ID'S"})
+    }
+
+    res.code(200).send(data);
+
+  } catch (error: any) {
+    res.code(500).send({ message: 'Internal Server Error',  error: error.message || 'An unexpected error occurred'});
+  }
+
+}
+
 
