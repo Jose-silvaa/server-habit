@@ -1,4 +1,8 @@
 import prisma from "../../db/client";
+import * as cueService from "../../services/cue/cueService"
+import * as routineService from "../../services/routine/routineService"
+import * as cravingService from "../../services/craving/cravingService"
+import * as rewardService from "../../services/reward/rewardService"
 
 
 export const bookedLastActivity = async(userId : any) =>{
@@ -31,4 +35,15 @@ export const verifyEmailUsers = async(email : string) =>{
 
 export const getAllUsers = async() =>{
     return await prisma.user.findMany();
+}
+
+export const getAllInformationRequired = async(cueId : string, routineId : string, rewardId : string, cravingId : string) =>{
+   const [cueName, rotuineName, cravingName, rewardName] = await Promise.all([
+        cueService.getCueByIdService(cueId),
+        routineService.getRoutineByIdService(routineId),
+        cravingService.getCravingByIdService(cravingId),
+        rewardService.getRewardByIdService(rewardId)
+   ])
+
+   return { cueName, rotuineName, cravingName, rewardName}
 }
