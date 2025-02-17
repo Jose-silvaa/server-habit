@@ -19,3 +19,7 @@ export const getAllUsersService = async()=>{
 export const bookedLastActivityService = async(userId : any) =>{
     return await userModel.bookedLastActivity(userId);
 }
+
+export const getAllInformationRequiredService = async(cueId : string, routineId : string, rewardId : string, cravingId : string) =>{
+    return await userModel.getAllInformationRequired(cueId, routineId, rewardId, cravingId);
+}
