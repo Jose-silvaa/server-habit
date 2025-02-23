@@ -5,18 +5,18 @@ import * as cravingService from "../../services/craving/cravingService"
 import * as rewardService from "../../services/reward/rewardService"
 
 
-export const bookedLastActivity = async(userId : any) =>{
+export const bookedLastActivity = async (userId: any) => {
 
     return await prisma.user.update({
-        where :  {id : userId},
-        data : { lastActivity : new Date()}
+        where: { id: userId },
+        data: { lastActivity: new Date() }
     })
 }
 
-export const getUserById = async(id: any) =>{
+export const getUserById = async (id: any) => {
     return await prisma.user.findUnique({
-        where : {id},
-        select : { id: true, name : true, email : true, createdAt : true}
+        where: { id },
+        select: { id: true, name: true, email: true, createdAt: true }
     })
 }
 
@@ -26,24 +26,24 @@ export const createUser = async (data: any) => {
     })
 }
 
-export const verifyEmailUsers = async(email : string) =>{
+export const verifyEmailUsers = async (email: string) => {
     return await prisma.user.findUnique({
-        where : {email},
-        select : {email : true, password : true, id : true}
+        where: { email },
+        select: { email: true, password: true, id: true }
     })
 }
 
-export const getAllUsers = async() =>{
+export const getAllUsers = async () => {
     return await prisma.user.findMany();
 }
 
-export const getAllInformationRequired = async(cueId : string, routineId : string, rewardId : string, cravingId : string) =>{
-   const [cueName, rotuineName, cravingName, rewardName] = await Promise.all([
+export const getAllInformationRequired = async (cueId: string, routineId: string, rewardId: string, cravingId: string) => {
+    const [cueName, rotuineName, cravingName, rewardName] = await Promise.all([
         cueService.getCueByIdService(cueId),
         routineService.getRoutineByIdService(routineId),
         cravingService.getCravingByIdService(cravingId),
         rewardService.getRewardByIdService(rewardId)
-   ])
+    ])
 
-   return { cueName, rotuineName, cravingName, rewardName}
+    return { cueName, rotuineName, cravingName, rewardName }
 }

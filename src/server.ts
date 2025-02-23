@@ -37,7 +37,7 @@ const start = async () => {
         host: '0.0.0.0',
         port: process.env.PORT ? Number(process.env.PORT) : 3333,
       });
-      console.log('Serve Roda');
+      console.log('Server Running');
     } catch (err) {
       console.error('Error starting the server:', err);
       process.exit(1);
